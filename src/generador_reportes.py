@@ -4,7 +4,7 @@ class GeneradorReportes:
 
     def generar_reporte_libros_prestados(self):
         reporte = []
-        for prestamo in self.gestor_prestamos.listar_prestamos():
+        for prestamo in self.gestor_prestamos.buscar_prestamos():
             if prestamo.get_fecha_devolucion() is None:
                 reporte.append({
                     "id_prestamo": prestamo.get_id_prestamo(),
@@ -16,14 +16,13 @@ class GeneradorReportes:
 
     def generar_reporte_libros_devueltos(self):
         reporte = []
-        for prestamo in self.gestor_prestamos.listar_prestamos():
-            if prestamo.get_fecha_devolucion() is not None:
+        for prestamo in self.gestor_prestamos.buscar_prestamos():
+            if prestamo.get_fecha_devolucion() is None:
                 reporte.append({
                     "id_prestamo": prestamo.get_id_prestamo(),
                     "id_libro": prestamo.get_id_libro(),
                     "id_usuario": prestamo.get_id_usuario(),
-                    "fecha_prestamo": prestamo.get_fecha_prestamo(),
-                    "fecha_devolucion": prestamo.get_fecha_devolucion()
+                    "fecha_prestamo": prestamo.get_fecha_prestamo()
                 })
         return reporte
 
@@ -33,7 +32,7 @@ class GeneradorReportes:
             "usuarios_mas_activos": {}
         }
 
-        for prestamo in self.gestor_prestamos.listar_prestamos():
+        for prestamo in self.gestor_prestamos.buscar_prestamos():
             libro_id = prestamo.get_id_libro()
             usuario_id = prestamo.get_id_usuario()
 

@@ -1,5 +1,3 @@
-from src.usuario import Usuario
-
 class GestorUsuarios:
     def __init__(self):
         self.usuarios = []

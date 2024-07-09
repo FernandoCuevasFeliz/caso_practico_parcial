@@ -1,5 +1,3 @@
-from src.libro import Libro
-
 class GestorLibros:
     def __init__(self):
         self.libros = []
